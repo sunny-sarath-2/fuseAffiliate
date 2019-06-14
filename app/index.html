@@ -181,6 +181,7 @@
       <div class="swiper-container-wrap">
         <div class="swiper-container swiper-slider" data-height="" data-min-height="300px" data-simulate-touch="false" data-autoplay="4200">
           <div class="swiper-wrapper" id="image-slider">
+              <!-- <div class="swiper-slide" data-slide-bg="images/slider-01.jpg"></div><div class="swiper-slide" data-slide-bg="images/slider-01.jpg"></div> -->
             <!-- <div class="swiper-slide" data-slide-bg="">
             <img src="images/slider-01.jpg" style="width: 1349px"/>
             </div>
@@ -552,14 +553,14 @@
         $("#facebook").attr("href",this.siteinfo.facebooklink)
         $("#twitter").attr("href",this.siteinfo.twitterlink)
         $("#google").attr("href",this.siteinfo.googlelink)
-        $("#image-slider").html($(`<div class="swiper-slide" data-slide-bg="images/slider-01.jpg"></div>`+`<div class="swiper-slide" data-slide-bg="images/slider-01.jpg"></div>`));
-        }// $("#image-slider").html($());
-        
-        // $("div").addClass("swiper-slide").attr("data-slide-bg","images/slider-01.jpg").appendTo(" ")
-        // $("#image-slider").append('<div class="swiper-slide" data-slide-bg="images/slider-01.jpg"></div>')
-        // $("image-slider").add("div").addClass("swiper-slide")
-
-        // $("#header-opening").text("check")
+        let bannerCount = parseInt(this.siteinfo.bannerCount)
+        let finalbanners = ""
+        for (let index = 1; index <= bannerCount; index++) {
+        let banner = `<div class="swiper-slide" data-slide-bg="/slider-01.jpg" style="background: url(${this.siteinfo['banner'+index].blob});background-size: cover;" ></div>`
+          finalbanners = finalbanners+banner
+        }
+        $("#image-slider").html($(finalbanners));
+        }
       });
       
       </script>
