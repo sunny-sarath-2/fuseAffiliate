@@ -466,12 +466,22 @@
         // console.log(response)
           console.log(window.location)
         response.data.map((data,key)=>{
-
-          let encode = btoa(JSON.stringify(data))
+          let image = data.Image;
+          let blob = "images/blog/post-01-960x550.jpg";
+          if(image && typeof image == "string"){
+            var json = JSON.parse(image);
+            blob = json.blob;
+          }
+          let Title = data.Title;
+          let Description = data.Description;
+          let encode = btoa(JSON.stringify({
+            Title,
+            Description
+          }))
           if(key==0)
-          $("#blogs").append(`<article class="post post-classic"><header class="post-media"><a class="thumbnail-classic" href="blog-post.html" target="_self"><figure><img width="960" height="550" src="images/blog/post-01-960x550.jpg" alt=""></figure></a></header><div class="post-title offset-top-30"><h3><a href="blog-post.html">${data.Title}</a></h3></div><section class="post-content text-left offset-top-5"><ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter"><li>2 days ago</li><li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li><li><span>by <a class="text-bermuda" href="#">Diana Hawkins</a></span></li><li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li></ul><div class="post-body offset-top-20"><p id="content">${data.Description.substring(0,300)+"..."}</p><div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html?data=${encode}">read more</a></div></div></section></article>`)
+          $("#blogs").append(`<article class="post post-classic"><header class="post-media"><a class="thumbnail-classic" href="blog-post.html" target="_self"><figure><img width="960" height="550" src="${blob}" alt=""></figure></a></header><div class="post-title offset-top-30"><h3><a href="blog-post.html">${data.Title}</a></h3></div><section class="post-content text-left offset-top-5"><ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter"><li>2 days ago</li><li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li><li><span>by <a class="text-bermuda" href="#">Diana Hawkins</a></span></li><li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li></ul><div class="post-body offset-top-20"><p id="content">${data.Description.substring(0,300)+"..."}</p><div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html?data=${encode}">read more</a></div></div></section></article>`)
           else
-          $("#blogs").append(`<div class="offset-top-75"><article class="post post-classic"><header class="post-media"><a class="thumbnail-classic" href="blog-post.html" target="_self"><figure><img width="960" height="550" src="images/blog/post-01-960x550.jpg" alt=""></figure></a></header><div class="post-title offset-top-30"><h3><a href="blog-post.html">${data.Title}</a></h3></div><section class="post-content text-left offset-top-5"><ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter"><li>2 days ago</li><li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li><li><span>by <a class="text-bermuda" href="#">Diana Hawkins</a></span></li><li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li></ul><div class="post-body offset-top-20"><p id="content">${data.Description.substring(0,300)+"..."}</p><div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html?data=${encode}">read more</a></div></div></section></article></div>`)
+          $("#blogs").append(`<div class="offset-top-75"><article class="post post-classic"><header class="post-media"><a class="thumbnail-classic" href="blog-post.html" target="_self"><figure><img width="960" height="550" src="${blob}" alt=""></figure></a></header><div class="post-title offset-top-30"><h3><a href="blog-post.html">${data.Title}</a></h3></div><section class="post-content text-left offset-top-5"><ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter"><li>2 days ago</li><li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li><li><span>by <a class="text-bermuda" href="#">Diana Hawkins</a></span></li><li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li></ul><div class="post-body offset-top-20"><p id="content">${data.Description.substring(0,300)+"..."}</p><div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html?data=${encode}">read more</a></div></div></section></article></div>`)
 
         })
       })
