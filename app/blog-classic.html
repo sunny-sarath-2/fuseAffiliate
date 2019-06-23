@@ -86,7 +86,7 @@
               <div class="rd-navbar-right-side">
                 <div class="rd-navbar-nav-wrap d-inline-block">
                   <!-- RD Navbar Nav-->
-                  <ul class="rd-navbar-nav">
+                  <ul class="rd-navbar-nav" id="header">
                     <li><a href="index.html">Home</a></li>
                     <!-- <li><a href="entertainment.html">Services</a>
                       RD Navbar Dropdown
@@ -98,25 +98,28 @@
                         <li><a href="gift-cards.html">Gift Cards</a></li>
                       </ul>
                     </li> -->
-                    <li ><a href="events.html">Events</a>
+                    <li  id="header-events"><a href="events.html">Events</a>
                       <!-- RD Navbar Dropdown-->
-                      <!-- <ul class="rd-navbar-dropdown">
-                        <li><a href="events.html">All Events</a></li>
-                        <li><a href="event-single.html">Event Page</a></li>
-                      </ul> -->
+                      <span class="rd-navbar-submenu-toggle"></span>
+                      <ul class="rd-navbar-dropdown">
+                        <!-- <li><a href="events.html">All Events</a></li>
+                        <li><a href="event-single.html">Event Page</a></li> -->
+                      </ul>
                     </li>
                     <!-- <li><a href="sales.html">Sales</a></li> -->
-                    <li class="active"><a href="blog-classic.html">News</a>
+                    <li class="active" id="header-news"><a href="blog-classic.html">News</a>
                       <!-- RD Navbar Dropdown-->
-                      <!-- <ul class="rd-navbar-dropdown">
-                        <li><a href="blog-classic.html">Blog Classic</a></li>
+                      <ul class="rd-navbar-dropdown">
+                        <!-- <li><a href="blog-classic.html">Blog Classic</a></li>
                         <li><a href="blog-grid.html">Blog Grid</a></li>
                         <li><a href="blog-masonry.html">Blog Masonry</a></li>
                         <li><a href="blog-modern.html">Blog Modern</a></li>
-                        <li><a href="blog-post.html">Blog Post</a></li>
-                      </ul> -->
+                        <li><a href="blog-post.html">Blog Post</a></li> -->
+                      </ul>
                     </li>
-                    <li><a href="gallery-masonry.html">Gallery</a>
+                    <li id="header-gallery"><a href="gallery-masonry.html">Gallery</a>
+                      <ul class="rd-navbar-dropdown" >
+                        </ul>
                       <!-- RD Navbar Megamenu-->
                       <!-- <div class="rd-navbar-megamenu">
                         <div class="row no-gutters justify-content-sm-center">
@@ -153,7 +156,10 @@
                         </div>
                       </div> -->
                     </li>
-                    <li><a href="contacts.html">Contacts</a></li>
+                    <li id="header-contacts"><a href="contacts.html" >Contacts</a>
+                      <ul class="rd-navbar-dropdown" id="header-contacts">
+                        </ul>
+                    </li>
                   </ul>
                 </div>
                 <!--RD Navbar Search-->
@@ -448,7 +454,7 @@
     <script type="text/javascript" src="Controller/Controller.js">
     </script>
     <script type="text/javascript">
-      ControllerGetSiteConfig("Georgia").then(response=>{
+      ControllerGetSiteConfig("NewYork").then(response=>{
         let maintenancemode = response.series[0].fields.maintenancemode
         if(maintenancemode){
           window.location = window.location.origin+"/maintenance.html";
@@ -462,7 +468,29 @@
         $("#twitter").attr("href",this.siteinfo.twitterlink)
         $("#google").attr("href",this.siteinfo.googlelink)
         
-        ControllerGetBlogs("Georgia","15").then(response=>{
+        ControllerGetPages("NewYork","40").then(response=>{
+          for (let i= 0; i <response.data.length; i++) {
+            if(response.data[i].positioning=="HeaderBar Menu"){
+              $("#header").append(`<li><a href="index.html">${response.data[i].Title}</a></li>`)
+            }else if(response.data[i].positioning=="SubPage Item"){
+              if(response.data[i].Dropdown=="Events"){
+                $("#header-events").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+              }else if(response.data[i].Dropdown=="News"){
+                $("#header-news").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+              }else if(response.data[i].Dropdown=="Gallery"){
+                $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+              }else if(response.data[i].Dropdown=="Conatcts"){
+                $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+              }
+            }
+          }
+        })
+
+        ControllerGetBlogs("NewYork","37").then(response=>{
         // console.log(response)
           console.log(window.location)
         response.data.map((data,key)=>{

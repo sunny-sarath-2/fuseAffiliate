@@ -1,7 +1,7 @@
 ControllerGetSiteConfig = chapter =>
   new Promise((resolve, rejects) => {
     let data = {
-      chapter: "Georgia"
+      chapter: chapter
     };
     getSiteconfigbyChapter("/shoojus/getSiteconfigbyChapter", data).then(
       result => {
@@ -11,6 +11,12 @@ ControllerGetSiteConfig = chapter =>
   });
 
 ControllerGetBlogs = (chapter, model) =>
+  new Promise((resolve, rejects) => {
+    getDataContentTypes("/fusecruds/getmodel/", chapter, model).then(result => {
+      resolve(result);
+    });
+  });
+ControllerGetPages = (chapter, model) =>
   new Promise((resolve, rejects) => {
     getDataContentTypes("/fusecruds/getmodel/", chapter, model).then(result => {
       resolve(result);
