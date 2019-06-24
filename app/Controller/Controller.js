@@ -18,7 +18,7 @@ ControllerGetBlogs = (chapter, model) =>
   });
 ControllerGetPages = (chapter, model) =>
   new Promise((resolve, rejects) => {
-    getDataContentTypes("/fusecruds/getmodel/", chapter, model).then(result => {
+    getDataContentTypes("/fusecruds/getmodel/", chapter, "48").then(result => {
       resolve(result);
     });
   });

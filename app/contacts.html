@@ -401,16 +401,16 @@
             }else if(response.data[i].positioning=="SubPage Item"){
               if(response.data[i].Dropdown=="Events"){
                 $("#header-events").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
               }else if(response.data[i].Dropdown=="News"){
                 $("#header-news").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
               }else if(response.data[i].Dropdown=="Gallery"){
                 $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
               }else if(response.data[i].Dropdown=="Conatcts"){
                 $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="shops.html">${response.data[i].Title}</a></li></ul>`)
+                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
               }
             }
           }
