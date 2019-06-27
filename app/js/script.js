@@ -1218,8 +1218,9 @@ $(function () {
 	if (plugins.isotope.length) {
 		var isogroup = [];
 		for (var i = 0; i < plugins.isotope.length; i++) {
+			console.log(plugins.isotope[i])
 			var isotopeItem = plugins.isotope[i],
-				isotopeInitAttrs = {
+			isotopeInitAttrs = {
 					itemSelector: '.isotope-item',
 					layoutMode: isotopeItem.getAttribute('data-isotope-layout') ? isotopeItem.getAttribute('data-isotope-layout') : 'masonry',
 					filter: '*'
@@ -1245,6 +1246,7 @@ $(function () {
 				isogroup[i].element.className += " isotope--loaded";
 				isogroup[i].layout();
 			}
+			console.log(isogroup,"~~~~~~~~~~~~~~~~~~~~~~~")
 		}, 200);
 
 		var resizeTimout;

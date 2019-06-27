@@ -2,7 +2,7 @@
 <html class="wide wow-animation" lang="en">
   <head>
     <!-- Site Title-->
-    <title>Contacts</title>
+    <title>Gallery</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +46,7 @@
                 <div class="left-side">
                   <!-- Contact Info-->
                   <address class="contact-info text-left">
-                    <div class="d-inline-block"><a class="unit align-items-xl-center flex-row unit-spacing-xxs" href="#"><span class="unit-left"><span class="icon icon-sm icon-primary icon-circle mdi mdi-map-marker text-bermuda"></span></span><span class="unit-body"><span class="text-gray-lighter" id="header-address">2130 Fulton Street, San Diego, CA 94117-1080 USA</span></span></a></div>
+                    <div class="d-inline-block"><a class="unit align-items-xl-center flex-row unit-spacing-xxs" href="#"><span class="unit-left"><span class="icon icon-sm icon-primary icon-circle mdi mdi-map-marker text-bermuda"></span></span><span class="unit-body"><span class="text-gray-lighter" id="header-address"> 2130 Fulton Street, San Diego, CA 94117-1080 USA</span></span></a></div>
                     <div class="d-inline-block">
                       <div class="unit align-items-center flex-row unit-spacing-xxs">
                         <div class="unit-left">
@@ -76,7 +76,7 @@
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img class="img-responsive center-block" src="images/logo.png" id="logo" style="height: 54px" width="179" height="54" alt=""></a></div>
+                  <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img id="logo" class="img-responsive center-block" src="images/logo.png" style="height: 54px" width="179" height="54" alt=""></a></div>
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle-search-fixed d-lg-none d-tablet" data-rd-navbar-toggle=".rd-navbar-search-wrap-fixed"></button>
                   <!-- RD Navbar Toggle-->
@@ -117,7 +117,7 @@
                             <li><a href="blog-post.html">Blog Post</a></li> -->
                           </ul>
                         </li>
-                        <li id="header-gallery"><a href="gallery-masonry.html">Gallery</a>
+                        <li class="active" id="header-gallery"><a href="gallery-masonry.html">Gallery</a>
                           <ul class="rd-navbar-dropdown" >
                             </ul>
                           <!-- RD Navbar Megamenu-->
@@ -156,11 +156,10 @@
                             </div>
                           </div> -->
                         </li>
-                        <li class="active" id="header-contacts"><a href="contacts.html" >Contacts</a>
+                        <li id="header-contacts"><a href="contacts.html" >Contacts</a>
                           <ul class="rd-navbar-dropdown" id="header-contacts">
                             </ul>
                         </li>
-                        
                       </ul>
                     </div>
                 <!--RD Navbar Search-->
@@ -190,7 +189,7 @@
           <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
               <div class="d-none d-lg-block">
-                <h1>Contacts</h1>
+                <h1>Gallery</h1>
               </div>
             </div>
           </div>
@@ -200,123 +199,123 @@
         <div class="container">
           <ul class="list-inline list-inline-12 list-inline-icon p">
             <li><a href="index.html">Home</a></li>
-            <li class="text-gray-lighter">Contacts
+            <li><a href="#">Pages</a></li>
+            <li class="text-gray-lighter">Gallery
             </li>
           </ul>
         </div>
       </section>
       <!-- Page Content-->
-      <main class="page-content">
-        <!-- Contacts-->
-        <section class="section-60 section-md-120 text-left">
+      <main class="page-content section-60 section-md-120">
+        <!-- Masonry Gallery-->
+        <section>
           <div class="container-wide">
-            <div class="row justify-content-sm-center">
-              <div class="col-md-10 col-lg-8">
-                <div class="inset-lg-right-60 inset-xxl-left-85 inset-xxl-right-120">
-                  <hr class="divider hr-left-0 bg-bermuda">
-                  <h3 class="offset-top-20">Get in Touch</h3>
-                  <p class="offset-top-40">You can contact us any way that is convenient for you. We are available 24/7 via fax or email. You can also use a quick contact form below or visit us personally. We would be happy to answer your questions.</p>
-                  <!-- RD Mailform-->
-                  <form class="rd-mailform text-left offset-top-35" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
-                    <div class="row justify-content-sm-center">
-                      <div class="col-xl-6">
-                        <div class="form-group form-group-outside">
-                          <label class="form-label form-label-outside" for="contact-first-name">First Name</label>
-                          <input class="form-control" id="contact-first-name" type="text" name="firstName" data-constraints="@Required">
-                        </div>
-                      </div>
-                      <div class="col-xl-6 offset-top-10 offset-xl-top-0">
-                        <div class="form-group form-group-outside">
-                          <label class="form-label form-label-outside" for="contact-last-name">Last Name</label>
-                          <input class="form-control" id="contact-last-name" type="text" name="lastName" data-constraints="@Required">
-                        </div>
-                      </div>
-                      <div class="col-xl-6 offset-top-10">
-                        <div class="form-group form-group-outside">
-                          <label class="form-label form-label-outside" for="contact-email">E-mail</label>
-                          <input class="form-control" id="contact-email" type="text" name="email" data-constraints="@Email @Required">
-                        </div>
-                      </div>
-                      <div class="col-xl-6 offset-top-10">
-                        <div class="form-group form-group-outside">
-                          <label class="form-label form-label-outside" for="contact-phone">Phone</label>
-                          <input class="form-control" id="contact-phone" type="text" name="phone" data-constraints="@PhoneNumber @Required">
-                        </div>
-                      </div>
-                      <div class="col-xl-12 offset-top-10">
-                        <div class="form-group form-group-outside">
-                          <label class="form-label form-label-outside" for="contact-message">Message</label>
-                          <textarea class="form-control" id="contact-message" name="message" data-constraints="@Required"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="offset-top-20">
-                      <button class="btn btn-primary" type="submit">send</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="col-md-10 col-lg-4 offset-top-90 offset-lg-top-0">
-                <hr class="divider hr-left-0 bg-bermuda">
-                <h5 class="offset-top-15">Socials</h5>
-                <ul class="list-inline list-inline-2 list-primary offset-top-20">
-                    <li><a class="icon icon-xs icon-circle fa fa-facebook text-gray-lighter" id="facebook2" target="_blank" href="#"></a></li>
-                    <li><a class="icon icon-xs icon-circle fa fa-twitter text-gray-lighter" id="twitter2" target="_blank" href="#" ></a></li>
-                    <li><a class="icon icon-xs icon-circle fa fa-google text-gray-lighter" id="google2"  target="_blank" href="#"></a></li>
-                </ul>
-                <div class="offset-top-60 offset-lg-top-85">
-                  <hr class="divider hr-left-0 bg-bermuda">
-                  <h5 class="offset-top-15">Phones</h5>
-                  <div class="offset-top-20">
-                    <!-- Unit-->
-                    <div class="unit align-items-center flex-row unit-spacing-xxs">
-                      <div class="unit-left"><span class="icon icon-sm mdi mdi-phone text-primary"></span></div>
-                      <div class="unit-body">
-                        <div class="d-inline-block">
-                          <p><a class="text-gray-light"  href="tel:#"><p>1-800-1234-567</p></a></p>
-                        </div>,
-                        <div class="d-inline-block">
-                          <p><a class="text-gray-light" href="tel:#">1-800-9514-654</a></p>
-                        </div>
-                      </div>
+            <div class="isotope-wrap isotope-offset-30">
+              <div class="row">
+                <!-- Isotope Filters-->
+                <div class="col-xl-12">
+                  <div>
+                    <div class="isotope-filters isotope-filters-horizontal isotope-filters-gallery">
+                      <ul class="list-inline list-inline-sm d-lg-block inset-md-left-15 inset-md-right-15">
+                        <li class="d-block d-sm-inline-block d-lg-none">
+                          <p>Choose your category:</p>
+                        </li>
+                        <li class="section-relative offset-top-20 offset-sm-top-0 d-block d-sm-inline-block d-lg-block">
+                          <button class="isotope-filters-toggle btn btn-primary-outline" data-custom-toggle="isotope-1" data-custom-toggle-disable-on-blur="true">Filter<span class="caret"></span></button>
+                          <ul class="list-sm-inline isotope-filters-list d-lg-block" id="isotope-1">
+                            <li><a class="active" data-isotope-filter="*" data-isotope-group="gallery" href="#">All</a></li>
+                            <li><a data-isotope-filter="Type 1" data-isotope-group="gallery" href="#">Type 1</a></li>
+                            <li><a data-isotope-filter="Type 2" data-isotope-group="gallery" href="#">Type 2</a></li>
+                            <li><a data-isotope-filter="Type 3" data-isotope-group="gallery" href="#">Type 3</a></li>
+                          </ul>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-                <div class="offset-top-60 offset-lg-top-85">
-                  <hr class="divider hr-left-0 bg-bermuda">
-                  <h5 class="offset-top-15">E-mail</h5>
-                  <div class="offset-top-20">
-                    <!-- Unit-->
-                    <div class="unit align-items-center flex-row unit-spacing-xxs">
-                      <div class="unit-left"><span class="icon icon-sm mdi mdi-email-outline text-primary"></span></div>
-                      <div class="unit-body">
-                        <p><a class="text-gray-light" href="mailto:#">info@demolink.org</a></p>
+                <!-- Isotope Content-->
+                <div class="col-xl-12 offset-top-120" id="gallery-main">
+                  <div class="isotope" data-isotope-layout="masonry" data-isotope-group="gallery">
+                    <div class="row" data-lightgallery="group" >
+                      <span id="gallery-display">
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="*">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" id="change-image-test" height="590" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="offset-top-60 offset-lg-top-85">
-                  <hr class="divider hr-left-0 bg-bermuda">
-                  <h5 class="offset-top-15">Address</h5>
-                  <div class="offset-top-20 p">
-                    <!-- Unit-->
-                    <div class="unit align-items-center align-items-lg-start align-items-xxl-center flex-row unit-spacing-xxs">
-                      <div class="unit-left"><span class="icon icon-sm mdi mdi-map-marker text-primary"></span></div>
-                      <div class="unit-body"><a class="text-gray-light" href="contacts.html">2130 Fulton Street, San Diego, CA 94117-1080 USA</a></div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 3">
+                        <a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img id="image-gallery" width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 2">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 1">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="590" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 1">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="590" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 2">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 1">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 3">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 2">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="590" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 1">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 2">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 3">
+                        <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300">
+                          <figure><img width="420" height="280" src="https://picsum.photos/200/300" alt="">
+                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                          </figure></a>
+                      </div>
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <!-- Google Map-->
-          <div class="google-map-container" data-zoom="15" data-center="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-styles="[{&quot;featureType&quot;:&quot;landscape.natural&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#e0efef&quot;}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;hue&quot;:&quot;#1900ff&quot;},{&quot;color&quot;:&quot;#c0e8e8&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;lightness&quot;:100},{&quot;visibility&quot;:&quot;simplified&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;labels&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit.line&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;lightness&quot;:700}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;all&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#7dcdcd&quot;}]}]">
-            <div class="google-map"></div>
-            <ul class="google-map-markers">
-              <li data-location="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-description="9870 St Vincent Place, Glasgow" data-icon="images/gmap_marker.png" data-icon-active="images/gmap_marker_active.png"></li>
-            </ul>
           </div>
         </section>
       </main>
@@ -382,19 +381,16 @@
           window.location = window.location.origin+"/maintenance.html";
         }else{
           this.siteinfo = JSON.parse(response.series[0].fields.siteinfo)
+          console.log(this.siteinfo)
           $("#logo").attr("src",this.siteinfo.logo.blob)
           $("#footer-logo").attr("src",this.siteinfo.logo.blob)
           $("#header-phone").html(this.siteinfo.phoneNumber)
-          $("#contact-phones").html(this.siteinfo.phoneNumber)
           $("#header-address").html(this.siteinfo.address)
           $("#facebook").attr("href",this.siteinfo.facebooklink)
-          $("#twitter").attr("href",this.siteinfo.twitterlink)
-          $("#google").attr("href",this.siteinfo.googlelink)
-          $("#facebook2").attr("href",this.siteinfo.facebooklink)
-          $("#twitter2").attr("href",this.siteinfo.twitterlink)
-          $("#google2").attr("href",this.siteinfo.googlelink)
-
-          ControllerGetPages("NewYork","40").then(response=>{
+        $("#twitter").attr("href",this.siteinfo.twitterlink)
+        $("#google").attr("href",this.siteinfo.googlelink)
+        
+        ControllerGetPages("NewYork","40").then(response=>{
           for (let i= 0; i <response.data.length; i++) {
             if(response.data[i].positioning=="HeaderBar Menu"){
               $("#header").append(`<li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li>`)
@@ -408,15 +404,31 @@
               }else if(response.data[i].Dropdown=="Gallery"){
                 $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
                 $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Conatcts"){
+              }else if(response.data[i].Dropdown=="Contacts"){
                 $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
                 $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
               }
             }
           }
-        })
-        }      
+        })  
+          ControllerGetBlogs("NewYork","55").then(response=>{
+            // console.log(response.data)
+            let galleryMain = `<div class="isotope" data-isotope-layout="masonry" data-isotope-group="gallery"><div class="row" data-lightgallery="group" >`
+            for (let i = 0; i < response.data.length; i++) {
+              let image = JSON.parse(response.data[i].Image)
+              // console.log(image)
+      //  $("#change-image-test").attr("src",image.blob)
+            // galleryMain =+ `<div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 3"><a class="thumbnail-rayen" data-lightgallery="item" href="https://picsum.photos/200/300"><figure><img width="420" height="280" src="https://picsum.photos/200/300" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a></div>`              
+      $("#gallery-display").after(`<span id="${i}" class="isotope-item"></span>`);
+              $(`#${i}`).html(`<div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Type 3" style="position:absolute"><a class="thumbnail-rayen" data-lightgallery="item" href="${image.blob}"><figure><img width="420" height="280" src="${image.blob}" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a></div>`)
+            }
+            $("#gallery-display").css("display","none")
+            // galleryMain=+`</div></div>`
+            // $("#gallery-main").append(galleryMain)
+          })
+      }      
       })
+
       </script>
   </body>
 </html>
