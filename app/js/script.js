@@ -569,8 +569,15 @@ $(function () {
 				break;
 			}
 		}
+		// let address = plugins.maps[i].getAttribute("data-center")
+		// console.log(address)
+		$.ajax({url:`https://maps.googleapis.com/maps/api/geocode/json?address=${"pronteff"}&key=AIzaSyBNzhGZ17hvTV8dFInbDrEbaMzIOWVh6o0`,success:(result)=>{
+		console.log(result.results)
+		console.log(result.results[0].geometry.location,"-----------------")
+			// Initialize map
 
-		$.getScript('//maps.google.com/maps/api/js?'+ ( key ? 'key='+ key + '&' : '' ) +'sensor=false&libraries=geometry,places&v=quarterly&key=', function () {
+		let q = "pronteff it solitions"
+		$.getScript('//maps.google.com/maps/api/js?'+ ( key ? 'key='+ key + '&' : '' ) +'sensor=false&libraries=geometry,places&v=quarterly&key=AIzaSyBNzhGZ17hvTV8dFInbDrEbaMzIOWVh6o0&q='+q, function () {
 			var head = document.getElementsByTagName('head')[0],
 				insertBefore = head.insertBefore;
 
@@ -586,19 +593,16 @@ $(function () {
 				var styles = plugins.maps[i].hasAttribute('data-styles') ? JSON.parse(plugins.maps[i].getAttribute("data-styles")) : [];
 				var center = plugins.maps[i].getAttribute("data-center") || "New York";
 
-				// Initialize map
 				var map = new google.maps.Map(plugins.maps[i].querySelectorAll(".google-map")[0], {
 					zoom: zoom,
 					styles: styles,
 					scrollwheel: false,
-					center: {lat: 0, lng: 0}
+					center: {lat:0,lng:0}
 				});
-
 				// Add map object to map node
 				plugins.maps[i].map = map;
 				plugins.maps[i].geocoder = geocoder;
 				plugins.maps[i].google = google;
-
 				// Get Center coordinates from attribute
 				getLatLngObject(center, null, plugins.maps[i], function (location, markerElement, mapElement) {
 					mapElement.map.setCenter(location);
@@ -676,6 +680,7 @@ $(function () {
 				}
 			}
 		});
+	}})
 	}
 
 	// Google maps

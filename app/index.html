@@ -503,10 +503,11 @@
                 </div>
               </div>
             </div>
-            <div class="google-map-container" data-zoom="15" data-center="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-styles="[{&quot;featureType&quot;:&quot;landscape.natural&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#e0efef&quot;}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;hue&quot;:&quot;#1900ff&quot;},{&quot;color&quot;:&quot;#c0e8e8&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;lightness&quot;:100},{&quot;visibility&quot;:&quot;simplified&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;labels&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit.line&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;lightness&quot;:700}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;all&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#7dcdcd&quot;}]}]">
-              <div class="google-map"></div>
+            <input type="text" style="display: none;" value="" id="map-changer"/>
+            <div class="google-map-container" data-zoom="15" data-center="pronteff it solution" data-styles="[{&quot;featureType&quot;:&quot;landscape.natural&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#e0efef&quot;}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;hue&quot;:&quot;#1900ff&quot;},{&quot;color&quot;:&quot;#c0e8e8&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;lightness&quot;:100},{&quot;visibility&quot;:&quot;simplified&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;labels&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit.line&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;lightness&quot;:700}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;all&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#7dcdcd&quot;}]}]">
+              <div class="google-map" id="google-map-custom"></div>
               <ul class="google-map-markers">
-                <li data-location="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-description="9870 St Vincent Place, Glasgow" data-icon="images/gmap_marker.png" data-icon-active="images/gmap_marker_active.png"></li>
+                <li data-location="pronteff it solution" data-description="pronteff it solution" data-icon="images/gmap_marker.png" data-icon-active="images/gmap_marker_active.png"></li>
               </ul>
             </div>
           </div>
@@ -586,7 +587,23 @@
         $("#facebook").attr("href",this.siteinfo.facebooklink)
         $("#twitter").attr("href",this.siteinfo.twitterlink)
         $("#google").attr("href",this.siteinfo.googlelink)
-       
+        $("#map-changer").val(this.siteinfo.address)
+        $("#map-changer").change((function(){
+          console.log("changed")
+          let address = $("#map-changer").val()
+          $.ajax({url:`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBNzhGZ17hvTV8dFInbDrEbaMzIOWVh6o0`,success:(result)=>{
+             let map = new google.maps.Map(document.getElementById('google-map-custom'),{
+              zoom: 10,
+		    			scrollwheel: false,
+				    	center: result.results[0].geometry.location
+            })
+           new google.maps.Marker({
+					position: result.results[0].geometry.location,
+					map: map
+				  });
+          }})
+        }())
+        )
         ControllerGetPages("NewYork","40").then(response=>{
           for (let i= 0; i <response.data.length; i++) {
             if(response.data[i].positioning=="HeaderBar Menu"){
