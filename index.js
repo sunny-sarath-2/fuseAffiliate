@@ -9,5 +9,5 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname + "/app", "", "index.html"));
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3004;
 app.listen(port, () => console.log(`Listening on port ${port}`));
