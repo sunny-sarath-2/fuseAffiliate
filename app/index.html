@@ -557,7 +557,8 @@
     </script>
     <script type="text/javascript" src="Controller/Controller.js">
     </script>
-   <script type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+<script type="text/javascript">
       ControllerGetSiteConfig("NewYork").then(response=>{
         console.log(response)
         let maintenancemode = response.series[0].fields.maintenancemode
@@ -683,8 +684,12 @@
             let Start_Date2 = data[1].Start_Date;
             let Event_city2 = data[1].Event_city;
             let id2 = data[1].id;
-            $("#first-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${Start_Date.replace("T", " ")}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
-            $("#secound-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${Start_Date2.replace("T", " ")}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title2}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description2.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
+            let start = Start_Date.split("T")
+            let date = moment(start[0],'YYYY-MM-DD').format('MMMM D');
+            let time = start[1]
+
+            $("#first-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${date}</span></li><li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">${time}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
+            $("#secound-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${date}</span></li><li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">${time}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title2}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description2.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
           });
 
         }

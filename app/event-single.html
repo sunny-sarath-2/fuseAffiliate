@@ -402,6 +402,7 @@
     <script type="text/javascript" src="Controller/Servicebase.js"></script>
     <script type="text/javascript" src="Controller/API.js"></script>
     <script type="text/javascript" src="Controller/Controller.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>    
     <script type="text/javascript">
       ControllerGetSiteConfig("NewYork").then(response => {
         let maintenancemode = response.series[0].fields.maintenancemode;
@@ -434,12 +435,13 @@
             controllergetSeriesData("NewYork","events",id).then(response=>{
               let data = response.series[0].fields
               let time = data.start_date.split("T")
+            let date = moment(time[0],'YYYY-MM-DD').format('MMMM D');
               console.log(time)
               $("#title").html(data.title)
               $("#body").html(data.description)
               $("#city").html(data.event_city)
               $("#time").html(time[1])
-              $("#date").html(time[0])
+              $("#date").html(date)
               console.log(response)
             })
             console.log(id)

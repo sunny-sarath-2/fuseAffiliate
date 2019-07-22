@@ -449,6 +449,7 @@
     <script type="text/javascript" src="Controller/Servicebase.js"></script>
     <script type="text/javascript" src="Controller/API.js"></script>
     <script type="text/javascript" src="Controller/Controller.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
     <script type="text/javascript">
       ControllerGetSiteConfig("NewYork").then(response => {
         let maintenancemode = response.series[0].fields.maintenancemode;
@@ -547,6 +548,8 @@
               let Start_Date = data.Start_Date;
               let Event_city = data.Event_city;
               let id = data.id;
+              let start = Start_Date.split("T");
+              let date = moment(start[0], "YYYY-MM-DD").format("MMMM D");
               let encode = btoa(
                 JSON.stringify({
                   Title,
@@ -556,12 +559,9 @@
                 })
               );
               $("#events").append(
-                `<div class="col-mdx-4 col-lg-4" style="margin-bottom:25px"><div class="post-event text-left"><div class="post-event-thumbnail-wrap"><a class="thumbnail-rayen" data-lightgallery="item" href="images/gallery/portfolio-31-1170x759_original.jpg"><figure><img width="570" height="310" src="images/blog/post-09-570x310.jpg" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a><div class="post-event-list"><ul class="list list-20"><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-calendar text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${Start_Date.substring(
-                  0,
-                  10
-                )}</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-clock text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${Start_Date.substring(
-                  11
-                )}</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-ticket-account text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${Event_city}</span></span></li></ul></div></div><div class="offset-top-20 inset-right-10"><h5><a href="event-single.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><p>${Description.substring(
+                `<div class="col-mdx-4 col-lg-4" style="margin-bottom:25px"><div class="post-event text-left"><div class="post-event-thumbnail-wrap"><a class="thumbnail-rayen" data-lightgallery="item" href="images/gallery/portfolio-31-1170x759_original.jpg"><figure><img width="570" height="310" src="images/blog/post-09-570x310.jpg" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a><div class="post-event-list"><ul class="list list-20"><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-calendar text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${date}</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-clock text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${
+                  start[1]
+                }</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-ticket-account text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${Event_city}</span></span></li></ul></div></div><div class="offset-top-20 inset-right-10"><h5><a href="event-single.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><p>${Description.substring(
                   0,
                   300
                 )}</p></div></div></div></div>`
