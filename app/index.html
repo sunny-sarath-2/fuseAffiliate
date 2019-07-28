@@ -21,7 +21,7 @@
   <body>
     <div class="preloader">
       <div class="preloader-body">
-        <i class="fa fa-spinner fa-spin" style="color: #0767DB; font-size: 45px;" aria-hidden="true"></i>
+        <!-- <i class="fa fa-spinner fa-spin" style="color: #0767DB; font-size: 45px;" aria-hidden="true"></i> -->
       </div>
     </div>
     <!-- Page-->
@@ -559,7 +559,7 @@
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
 <script type="text/javascript">
-      ControllerGetSiteConfig("NewYork").then(response=>{
+      ControllerGetSiteConfig("new_york").then(response=>{
         console.log(response)
         let maintenancemode = response.series[0].fields.maintenancemode
         if(maintenancemode){
@@ -580,6 +580,7 @@
         $("#google").attr("href",this.siteinfo.googlelink)
         $("#map-changer").val(this.siteinfo.address)
         $("#map-changer").change((function(){
+        let timeout = setTimeout(() => {
           console.log("changed")
           let address = $("#map-changer").val()
           $.ajax({url:`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBNzhGZ17hvTV8dFInbDrEbaMzIOWVh6o0`,success:(result)=>{
@@ -593,25 +594,29 @@
 					map: map
 				  });
           }})
+          clearTimeout(timeout)
+        }, 2000);
         }())
         )
         ControllerGetPages("NewYork","40").then(response=>{
           for (let i= 0; i <response.data.length; i++) {
-            if(response.data[i].positioning=="HeaderBar Menu"){
-              $("#header").append(`<li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li>`)
-            }else if(response.data[i].positioning=="SubPage Item"){
-              if(response.data[i].Dropdown=="Events"){
-                $("#header-events").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="News"){
-                $("#header-news").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Gallery"){
-                $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Contacts"){
-                $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
+            if(response.data[i].status=="true"){
+              if(response.data[i].positioning=="HeaderBar Menu"){
+                $("#header").append(`<li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li>`)
+              }else if(response.data[i].positioning=="SubPage Item"){
+                if(response.data[i].dropdown=="Events"){
+                  $("#header-events").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                  $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+                }else if(response.data[i].dropdown=="News"){
+                  $("#header-news").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                  $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+                }else if(response.data[i].dropdown=="Gallery"){
+                  $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                  $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+                }else if(response.data[i].dropdown=="Contacts"){
+                  $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
+                  $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+                }
               }
             }
           }
@@ -648,50 +653,60 @@
         $("#image-slider-li").html($(finalbannersli));
         $("#image-slider-div").html($(finalbannersdiv));
         
-        ControllerGetBlogs("NewYork","53").then(response=>{
-         console.log(response)
+        ControllerGetBlogs("new_york","121").then(response=>{
         response.data.map((data,key)=>{
-          let image = data.Image;
+          let image = data.featured_image;
           let blob = "";
           if(image && typeof image == "string"){
             var json = JSON.parse(image);
             blob = json.blob;
           }
-          let Title = data.Title;
-          let Description = data.Description;
-          let edata = {Title: Title, Description: Description};
-          let encode = btoa(edata);
-          if(key<=2){
-            if(key==0)
-            $("#home-news").append(`<div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5"><div class="post-box shadow-drop post-box-max-width-none d-block"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap post-box-top-radius"><img class="img-responsive center-block post-box-top-radius" src="${blob}" width="320" height="442" alt=""></span></a></div><div class="post-box-caption post-box-bottom-radius bg-default"><a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Article</span></a><h5 class="offset-top-15"><a href="blog-post.html">${Title}</a></h5><p class="offset-top-20">${Description.substring(0,300)}</p><ul class="list-inline list-inline-20 offset-top-22"><li><span>by </span><span class="text-bermuda">Admin</span></li></ul></div></div></div>`)
-            else
-            $("#home-news").append(`<div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5"><div class="post-box shadow-drop post-box-max-width-none d-block"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap post-box-top-radius"><img class="img-responsive center-block post-box-top-radius" src="${blob}" width="320" height="442" alt=""></span></a></div><div class="post-box-caption post-box-bottom-radius bg-default"><a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Article</span></a><h5 class="offset-top-15"><a href="blog-post.html">${Title}</a></h5><p class="offset-top-20">${Description.substring(0,300)}</p><ul class="list-inline list-inline-20 offset-top-22"><li><span>by </span><span class="text-bermuda">Admin</span></li></ul></div></div></div>`)
+          let Title = data.title;
+          let Description = data.long_description;
+          if(data.status == "true"){
+            if(key<=2){
+              if(key==0)
+              $("#home-news").append(`<div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5"><div class="post-box shadow-drop post-box-max-width-none d-block"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap post-box-top-radius"><img class="img-responsive center-block post-box-top-radius" src="${blob}" width="320" height="442" alt=""></span></a></div><div class="post-box-caption post-box-bottom-radius bg-default"><a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Article</span></a><h5 class="offset-top-15"><a href="blog-post.html">${Title}</a></h5><p class="offset-top-20">${Description.substring(0,300)}</p><ul class="list-inline list-inline-20 offset-top-22"><li><span>by </span><span class="text-bermuda">Admin</span></li></ul></div></div></div>`)
+              else
+              $("#home-news").append(`<div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5"><div class="post-box shadow-drop post-box-max-width-none d-block"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap post-box-top-radius"><img class="img-responsive center-block post-box-top-radius" src="${blob}" width="320" height="442" alt=""></span></a></div><div class="post-box-caption post-box-bottom-radius bg-default"><a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Article</span></a><h5 class="offset-top-15"><a href="blog-post.html">${Title}</a></h5><p class="offset-top-20">${Description.substring(0,300)}</p><ul class="list-inline list-inline-20 offset-top-22"><li><span>by </span><span class="text-bermuda">Admin</span></li></ul></div></div></div>`)
+            }
+
           }
         })
       })
 
 
-      ControllerGetBlogs("NewYork", "54").then(response => {
-            console.log(response.data);
-            let data = response.data
-            let Title = data[0].Title;
-            let Description = data[0].Description;
-            let Start_Date = data[0].Start_Date;
-            let Event_city = data[0].Event_city;
-            let id = data[0].id;
-            let Title2 = data[1].Title;
-            let Description2 = data[1].Description;
-            let Start_Date2 = data[1].Start_Date;
-            let Event_city2 = data[1].Event_city;
-            let id2 = data[1].id;
-            let start = Start_Date.split("T")
-            let date = moment(start[0],'YYYY-MM-DD').format('MMMM D');
-            let time = start[1]
-
-            $("#first-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${date}</span></li><li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">${time}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
-            $("#secound-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${date}</span></li><li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">${time}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title2}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description2.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
-          });
-
+      ControllerGetBlogs("new_york", "123").then(response => {
+        let one = false
+        let two = false
+            response.data.map((data,key)=>{
+              let Title = data.title;
+              let Description = data.description;
+              let Start_Date = data.date;
+              let Event_city = data.city;
+              let id = data.id;
+              let blob = "";
+              let image = data.featured_image 
+              if(image && typeof image == "string"){
+              var json = JSON.parse(image);
+              blob = json.blob;
+            }
+              let start = Start_Date.split("T")
+              let date = moment(start[0],'YYYY-MM-DD').format('MMMM D');
+              let time = start[1]
+              
+              if(data.status == "true"){
+                if(!two&&one){
+                  $("#secound-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="${blob}" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${date}</span></li><li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">${time}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
+                    two = true
+                }
+                if(!one){
+                  $("#first-event").append(`<div class="row justify-content-sm-center justify-content-xl-start row-30"><div class="col-md-5 col-lg-10 col-xl-5"><img class="img-responsive" src="${blob}" width="320" height="442" alt=""></div><div class="col-md-6 col-lg-10 col-xl-6"><ul class="list-inline list-inline-20"><li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">${date}</span></li><li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">${time}</span></li></ul><div class="offset-top-25"><h5><a href="event-single.html?id=${id}">${Title}</a></h5></div><div class="offset-top-25"><p class="d-lg-none d-xl-inline">${Description.substring(0,300)} </div><div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html?id=${id}">learn more</a></div></div></div>`);
+                  one =true
+                }
+              }
+            })
+            })
         }
       });
       

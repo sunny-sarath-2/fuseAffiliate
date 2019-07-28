@@ -1,4 +1,4 @@
-let url = "http://3.215.207.179:1337";
+let url = "http://13.126.72.94:1337";
 getServiceCall = api =>
   new Promise((resolve, rejects) => {
     fetch(url + api).then(result => {

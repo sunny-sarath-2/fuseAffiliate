@@ -12,15 +12,19 @@ ControllerGetSiteConfig = chapter =>
 
 ControllerGetBlogs = (chapter, model) =>
   new Promise((resolve, rejects) => {
-    getDataContentTypes("/fusecruds/getmodel/", chapter, model).then(result => {
-      resolve(result);
-    });
+    getDataContentTypes("/fusecruds/getmodel/", "new_york", model).then(
+      result => {
+        resolve(result);
+      }
+    );
   });
 ControllerGetPages = (chapter, model) =>
   new Promise((resolve, rejects) => {
-    getDataContentTypes("/fusecruds/getmodel/", chapter, "56").then(result => {
-      resolve(result);
-    });
+    getDataContentTypes("/fusecruds/getmodel/", "new_york", "124").then(
+      result => {
+        resolve(result);
+      }
+    );
   });
 
 ControllerfetchSeries = data =>
@@ -43,7 +47,7 @@ ControllerContentTypeData = data =>
 
 controllergetSeriesData = (chapter, model, series) =>
   new Promise((resolve, rejects) => {
-    getSeriesData("/fusecruds/getmodel/", "NewYork", model, series).then(
+    getSeriesData("/fusecruds/getmodel/", "new_york", model, series).then(
       result => {
         resolve(result);
       }

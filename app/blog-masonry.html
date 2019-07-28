@@ -21,7 +21,7 @@
   <body>
     <div class="preloader">
       <div class="preloader-body">
-        <i class="fa fa-spinner fa-spin" style="color: #0767DB; font-size: 45px;" aria-hidden="true"></i>
+        <!-- <i class="fa fa-spinner fa-spin" style="color: #0767DB; font-size: 45px;" aria-hidden="true"></i> -->
 
       </div>
     </div>
@@ -292,7 +292,7 @@
     <script type="text/javascript" src="Controller/Controller.js">
     </script>
     <script>
-      ControllerGetSiteConfig("NewYork").then(response=>{
+      ControllerGetSiteConfig("new_york").then(response=>{
         let maintenancemode = response.series[0].fields.maintenancemode
         if(maintenancemode){
           window.location = window.location.origin+"/maintenance.html";
@@ -308,107 +308,142 @@
         $("#twitter").attr("href",this.siteinfo.twitterlink)
         $("#google").attr("href",this.siteinfo.googlelink)
 
-        ControllerGetPages("NewYork","40").then(response=>{
-          console.log(response, 'dd');
-          for (let i= 0; i <response.data.length; i++) {
-            if(response.data[i].positioning=="HeaderBar Menu"){
-              $("#header").append(`<li><a href="index.html">${response.data[i].Title}</a></li>`)
-            }else if(response.data[i].positioning=="SubPage Item"){
-              if(response.data[i].Dropdown=="Events"){
-                $("#header-events").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="News"){
-                $("#header-news").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Gallery"){
-                $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Conatcts"){
-                $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="#">${response.data[i].Title}</a></li></ul>`)
+        ControllerGetPages("NewYork", "40").then(response => {
+            for (let i = 0; i < response.data.length; i++) {
+              if (response.data[i].status == "true") {
+                if (response.data[i].positioning == "HeaderBar Menu") {
+                  $("#header").append(
+                    `<li><a href="page.html?id=${response.data[i].id}">${
+                      response.data[i].title
+                    }</a></li>`
+                  );
+                } else if (response.data[i].positioning == "SubPage Item") {
+                  if (response.data[i].dropdown == "Events") {
+                    $("#header-events").addClass(
+                      "rd-navbar--has-dropdown rd-navbar-submenu"
+                    );
+                    $("#header-events").append(
+                      `<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${
+                        response.data[i].id
+                      }">${response.data[i].title}</a></li></ul>`
+                    );
+                  } else if (response.data[i].dropdown == "News") {
+                    $("#header-news").addClass(
+                      "rd-navbar--has-dropdown rd-navbar-submenu"
+                    );
+                    $("#header-news").append(
+                      `<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${
+                        response.data[i].id
+                      }">${response.data[i].title}</a></li></ul>`
+                    );
+                  } else if (response.data[i].dropdown == "Gallery") {
+                    $("#header-gallery").addClass(
+                      "rd-navbar--has-dropdown rd-navbar-submenu"
+                    );
+                    $("#header-gallery").append(
+                      `<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${
+                        response.data[i].id
+                      }">${response.data[i].title}</a></li></ul>`
+                    );
+                  } else if (response.data[i].dropdown == "Contacts") {
+                    $("#header-contacts").addClass(
+                      "rd-navbar--has-dropdown rd-navbar-submenu"
+                    );
+                    $("#header-contacts").append(
+                      `<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${
+                        response.data[i].id
+                      }">${response.data[i].title}</a></li></ul>`
+                    );
+                  }
+                }
               }
             }
-          }
-        })
-
-        ControllerGetBlogs("NewYork","53").then(response=>{
+          });
+          
+        ControllerGetBlogs("new_york", "121").then(response=>{
+          console.log(response)
           let one = true
           let two = false
           let three = false  
         response.data.map((data,key)=>{
-          let image = data.Image;
+          let image = data.featured_image;
           let blob = "";
           if(image && typeof image == "string"){
             var json = JSON.parse(image);
             blob = json.blob;
           }
-          let Title = data.Title;
-          let Description = data.Description;
+          let Title = data.title;
+          let Description = data.long_description;
           let authorName = "FAS"
-          if(one){
-            one=false;two=true;three=false;
-            if(key==0)
-            $("#first-row").append(`<div class="post-box  offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div>`)
-            else
-            $("#first-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div>`)
-            
-          }
-          else if(two){
-            one=false;two=false;three=true;
-            if(key==1)
-            $("#secound-row").append(`<div class="post-box offset-top-30"" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div>`)
-            else
-            $("#secound-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div>`)
-          }
-          else if(three){
-            one=true;two=false;three=false;
-            if(key==2)
-            $("#third-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div  style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div>`)
-            else
-            $("#third-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div>`)
+          let id= data.id
+          if(data.status=="true"){
+
+            if(one){
+              one=false;two=true;three=false;
+              if(key==0)
+              $("#first-row").append(`<div class="post-box  offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div>`)
+              else
+              $("#first-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div>`)
+              
+            }
+            else if(two){
+              one=false;two=false;three=true;
+              if(key==1)
+              $("#secound-row").append(`<div class="post-box offset-top-30"" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div>`)
+              else
+              $("#secound-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div>`)
+            }
+            else if(three){
+              one=true;two=false;three=false;
+              if(key==2)
+              $("#third-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div  style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div>`)
+              else
+              $("#third-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div>`)
+            }
           }
 
         })
       })
-      if(admininfo.news == "true"){
+      
+        if(admininfo.news == "true"||admininfo.news == true){
         ControllerfetchSeries().then(response => {
+          console.log(response)
           let one = true
           let two = false
           let three = false    
           for (let i = 0; i < response.series.length; i++) {
-                let Description = response.series[i].fields.body;
+              let id = response.series[i].series_id
+            let Description = response.series[i].fields.body;
                 let Title = response.series[i].fields.description;
                 let blob = "";
                 let authorName = response.series[i].fields.author_name
-                console.log(Title)
-              
                 if(one){
             one=false;two=true;three=false;
             if(i==0)
-            $("#first-row").append(`<div class="post-box" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+            $("#first-row").append(`<div class="post-box" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
                   0,
                   300
                 )}</p></div></div></div>`)
             else
-            $("#first-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+            $("#first-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
                   0,
                   300
                 )}</p></div></div></div>`)
@@ -417,12 +452,12 @@
           else if(two){
             one=false;two=false;three=true;
             if(i==1)
-            $("#secound-row").append(`<div class="post-box" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+            $("#secound-row").append(`<div class="post-box" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
                   0,
                   300
                 )}</p></div></div></div>`)
             else
-            $("#secound-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+            $("#secound-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
                   0,
                   300
                 )}</p></div></div></div>`)
@@ -430,12 +465,12 @@
           else if(three){
             one=true;two=false;three=false;
             if(i==2)
-            $("#third-row").append(`<div class="post-box" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div  style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+            $("#third-row").append(`<div class="post-box" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div  style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
                   0,
                   300
                 )}</p></div></div></div>`)
             else
-            $("#third-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
+            $("#third-row").append(`<div class="post-box offset-top-30" style="background-color: #fff;"><div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html?id=${id}"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="${blob}" width="420" height="270" alt=""></span></a><div style="padding: 0px 30px 30px 30px;"><h5 class="offset-top-20"><a href="blog-post.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><ul class="list-inline list-inline-dashed list-inline-12 text-gray-lighter p"><li><span>by <a class="text-bermuda" href="#">${authorName}</a></span></li></ul></div><p class="offset-top-20">${Description.substring(
                   0,
                   300
                 )}</p></div></div></div>`)
