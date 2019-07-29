@@ -11803,14 +11803,14 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-fullwidth .rd-navbar-nav > li > a:before {
 	content: '';
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	top: 70%;
+	/* left: 50%; */
 	z-index: -1;
-	width: 38px;
+	width: 100%;
 	height: 4px;
-	margin-top: -4px;
+	/* margin-top: -4px; */
 	background: #FF9483;
-	transform: translate(-50%, -50%) rotate(-45deg);
+	/* transform: translate(-50%, -50%) rotate(-45deg); */
 	opacity: 0;
 	transition: .3s all ease;
 }

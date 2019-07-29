@@ -559,14 +559,6 @@
               let id = data.id;
               let start = Start_Date.split("T");
               let date = moment(start[0], "YYYY-MM-DD").format("MMMM D");
-              let encode = btoa(
-                JSON.stringify({
-                  Title,
-                  Description,
-                  Start_Date,
-                  Event_city
-                })
-              );
               $("#events").append(
                 `<div class="col-mdx-4 col-lg-4" style="margin-bottom:25px"><div class="post-event text-left"><div class="post-event-thumbnail-wrap"><a class="thumbnail-rayen" data-lightgallery="item" href="images/gallery/portfolio-31-1170x759_original.jpg"><figure><img width="570" height="310" src="${blob}" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a><div class="post-event-list"><ul class="list list-20"><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-calendar text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${date}</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-clock text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${
                   start[1]
