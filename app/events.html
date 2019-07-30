@@ -546,27 +546,35 @@
             console.log(response);
 
             response.data.map((data, key) => {
-              let Title = data.title;
-              let Description = data.description;
-              let Start_Date = data.date;
-              let Event_city = data.city;
-              let image = data.featured_image;
-              let blob = "";
-              if (image && typeof image == "string") {
-                var json = JSON.parse(image);
-                blob = json.blob;
+              if (data.status == true || data.status == "true") {
+                console.log(data);
+                let Title = "";
+                if (data.title) Title = data.title;
+                let Description = "";
+                if (data.description) Description = data.description;
+                let Start_Date = "";
+                if (data.date) Start_Date = data.date;
+                let Event_city = "";
+                if (data.city) Event_city = data.city;
+                let image = "";
+                if (data.featured_image) image = data.featured_image;
+                let blob = "";
+                if (image && typeof image == "string") {
+                  var json = JSON.parse(image);
+                  blob = json.blob;
+                }
+                let id = data.id;
+                let start = Start_Date.split("T");
+                let date = moment(start[0], "YYYY-MM-DD").format("MMMM D");
+                $("#events").append(
+                  `<div class="col-mdx-4 col-lg-4" style="margin-bottom:25px"><div class="post-event text-left"><div class="post-event-thumbnail-wrap"><a class="thumbnail-rayen" data-lightgallery="item" href="images/gallery/portfolio-31-1170x759_original.jpg"><figure><img width="570" height="310" src="${blob}" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a><div class="post-event-list"><ul class="list list-20"><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-calendar text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${date}</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-clock text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${
+                    start[1]
+                  }</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-ticket-account text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${Event_city}</span></span></li></ul></div></div><div class="offset-top-20 inset-right-10"><h5><a href="event-single.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><p>${Description.substring(
+                    0,
+                    300
+                  )}</p></div></div></div></div>`
+                );
               }
-              let id = data.id;
-              let start = Start_Date.split("T");
-              let date = moment(start[0], "YYYY-MM-DD").format("MMMM D");
-              $("#events").append(
-                `<div class="col-mdx-4 col-lg-4" style="margin-bottom:25px"><div class="post-event text-left"><div class="post-event-thumbnail-wrap"><a class="thumbnail-rayen" data-lightgallery="item" href="images/gallery/portfolio-31-1170x759_original.jpg"><figure><img width="570" height="310" src="${blob}" alt=""><figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption></figure></a><div class="post-event-list"><ul class="list list-20"><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-calendar text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${date}</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-clock text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${
-                  start[1]
-                }</span></span></li><li class="box-xs bg-accent text-center"><span class="icon icon-normal icon-sm mdi mdi-ticket-account text-white"></span><span class="d-block offset-top-0"><span class="text-small text-white">${Event_city}</span></span></li></ul></div></div><div class="offset-top-20 inset-right-10"><h5><a href="event-single.html?id=${id}">${Title}</a></h5><div class="offset-top-15"><p>${Description.substring(
-                  0,
-                  300
-                )}</p></div></div></div></div>`
-              );
             });
           });
         }
