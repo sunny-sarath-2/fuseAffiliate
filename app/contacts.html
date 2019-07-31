@@ -146,7 +146,7 @@
                             </div>
                           </div> -->
                         </li>
-                        <li class="active" id="header-contacts"><a href="contacts.html" >Contacts</a>
+                        <li class="active" id="header-contacts"><a href="contacts.html" >Contacts us</a>
                           <ul class="rd-navbar-dropdown" id="header-contacts">
                             </ul>
                         </li>
@@ -263,10 +263,7 @@
                       <div class="unit-left"><span class="icon icon-sm mdi mdi-phone text-primary"></span></div>
                       <div class="unit-body">
                         <div class="d-inline-block">
-                          <p><a class="text-gray-light"  href="tel:#"><p>1-800-1234-567</p></a></p>
-                        </div>,
-                        <div class="d-inline-block">
-                          <p><a class="text-gray-light" href="tel:#">1-800-9514-654</a></p>
+                          <p><a class="text-gray-light"  href="tel:#" ><p id="body-phone">1-800-1234-567</p></a></p>
                         </div>
                       </div>
                     </div>
@@ -280,7 +277,7 @@
                     <div class="unit align-items-center flex-row unit-spacing-xxs">
                       <div class="unit-left"><span class="icon icon-sm mdi mdi-email-outline text-primary"></span></div>
                       <div class="unit-body">
-                        <p><a class="text-gray-light" href="mailto:#">info@demolink.org</a></p>
+                        <p><a class="text-gray-light" href="mailto:#" id="body-mail">info@demolink.org</a></p>
                       </div>
                     </div>
                   </div>
@@ -292,7 +289,7 @@
                     <!-- Unit-->
                     <div class="unit align-items-center align-items-lg-start align-items-xxl-center flex-row unit-spacing-xxs">
                       <div class="unit-left"><span class="icon icon-sm mdi mdi-map-marker text-primary"></span></div>
-                      <div class="unit-body"><a class="text-gray-light" href="contacts.html">2130 Fulton Street, San Diego, CA 94117-1080 USA</a></div>
+                      <div class="unit-body"><a class="text-gray-light" href="contacts.html" id="body-address">2130 Fulton Street, San Diego, CA 94117-1080 USA</a></div>
                     </div>
                   </div>
                 </div>
@@ -372,35 +369,39 @@
           window.location = window.location.origin+"/maintenance.html";
         }else{
           this.siteinfo = JSON.parse(response.series[0].fields.siteinfo)
-          $("#logo").attr("src",this.siteinfo.logo.blob)
-          $("#footer-logo").attr("src",this.siteinfo.logo.blob)
-          $("#header-phone").html(this.siteinfo.phoneNumber)
-          $("#contact-phones").html(this.siteinfo.phoneNumber)
+          console.log(this.siteinfo)
+          $("#logo").attr("src",this.siteinfo.logo)
+          $("#footer-logo").attr("src",this.siteinfo.logo)
+          $("#header-phone").html(this.siteinfo.phone_number)
+          $("#body-phone").html(this.siteinfo.phone_number)
+          $("#contact-phones").html(this.siteinfo.phone_number)
           $("#header-address").html(this.siteinfo.address)
-          $("#facebook").attr("href",this.siteinfo.facebooklink)
-          $("#twitter").attr("href",this.siteinfo.twitterlink)
-          $("#google").attr("href",this.siteinfo.googlelink)
-          $("#facebook2").attr("href",this.siteinfo.facebooklink)
-          $("#twitter2").attr("href",this.siteinfo.twitterlink)
-          $("#google2").attr("href",this.siteinfo.googlelink)
-
-          ControllerGetPages("NewYork","40").then(response=>{
+          $("#facebook").attr("href","http://"+this.siteinfo.facebook_link)
+          $("#twitter").attr("href","http://"+this.siteinfo.twitter_link)
+          $("#google").attr("href","http://"+this.siteinfo.google_link)
+          $("#facebook2").attr("href","http://"+this.siteinfo.facebook_link)
+          $("#twitter2").attr("href","http://"+this.siteinfo.twitter_link)
+          $("#google2").attr("href","http://"+this.siteinfo.google_link)
+          $("#body-mail").html(this.siteinfo.email);
+          $("#body-address").html(this.siteinfo.address)
+          ControllerGetPages("new_york","40").then(response=>{
+            console.log(response)
           for (let i= 0; i <response.data.length; i++) {
             if(response.data[i].positioning=="HeaderBar Menu"){
-              $("#header").append(`<li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li>`)
+              $("#header").append(`<li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li>`)
             }else if(response.data[i].positioning=="SubPage Item"){
-              if(response.data[i].Dropdown=="Events"){
+              if(response.data[i].dropdown=="Events"){
                 $("#header-events").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="News"){
+                $("#header-events").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+              }else if(response.data[i].dropdown=="News"){
                 $("#header-news").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Gallery"){
+                $("#header-news").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+              }else if(response.data[i].dropdown=="Gallery"){
                 $("#header-gallery").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
-              }else if(response.data[i].Dropdown=="Conatcts"){
+                $("#header-gallery").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
+              }else if(response.data[i].dropdown=="Conatcts"){
                 $("#header-contacts").addClass("rd-navbar--has-dropdown rd-navbar-submenu")
-                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].Title}</a></li></ul>`)
+                $("#header-contacts").append(`<ul class="rd-navbar-dropdown"><li><a href="page.html?id=${response.data[i].id}">${response.data[i].title}</a></li></ul>`)
               }
             }
           }

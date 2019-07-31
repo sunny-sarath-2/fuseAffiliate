@@ -209,27 +209,27 @@
                     <li class="active" id="header-events">
                       <a href="events.html">Events</a>
                       <!-- RD Navbar Dropdown-->
-                      <span class="rd-navbar-submenu-toggle"></span>
-                      <ul class="rd-navbar-dropdown">
-                        <!-- <li><a href="events.html">All Events</a></li>
-                            <li><a href="event-single.html">Event Page</a></li> -->
-                      </ul>
+                      <!-- <span class="rd-navbar-submenu-toggle"></span> -->
+                      <!-- <ul class="rd-navbar-dropdown">
+                        <li><a href="events.html">All Events</a></li>
+                        <li><a href="event-single.html">Event Page</a></li>
+                      </ul> -->
                     </li>
                     <!-- <li><a href="sales.html">Sales</a></li> -->
                     <li id="header-news">
                       <a href="blog-masonry.html">News</a>
                       <!-- RD Navbar Dropdown-->
-                      <ul class="rd-navbar-dropdown">
-                        <!-- <li><a href="blog-classic.html">Blog Classic</a></li>
-                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                            <li><a href="blog-masonry.html">Blog Masonry</a></li>
-                            <li><a href="blog-modern.html">Blog Modern</a></li>
-                            <li><a href="blog-post.html">Blog Post</a></li> -->
-                      </ul>
+                      <!-- <ul class="rd-navbar-dropdown">
+                        <li><a href="blog-classic.html">Blog Classic</a></li>
+                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                        <li><a href="blog-masonry.html">Blog Masonry</a></li>
+                        <li><a href="blog-modern.html">Blog Modern</a></li>
+                        <li><a href="blog-post.html">Blog Post</a></li>
+                      </ul> -->
                     </li>
                     <li id="header-gallery">
                       <a href="gallery-masonry.html">Gallery</a>
-                      <ul class="rd-navbar-dropdown"></ul>
+                      <!-- <ul class="rd-navbar-dropdown"></ul> -->
                       <!-- RD Navbar Megamenu-->
                       <!-- <div class="rd-navbar-megamenu">
                             <div class="row no-gutters justify-content-sm-center">
@@ -267,7 +267,7 @@
                           </div> -->
                     </li>
                     <li id="header-contacts">
-                      <a href="contacts.html">Contacts</a>
+                      <a href="contacts.html">Contact us</a>
                       <ul class="rd-navbar-dropdown"></ul>
                     </li>
                   </ul>
@@ -459,13 +459,13 @@
         } else {
           admininfo = JSON.parse(response.series[0].fields.admininfo);
           this.siteinfo = JSON.parse(response.series[0].fields.siteinfo);
-          $("#logo").attr("src", this.siteinfo.logo.blob);
-          $("#footer-logo").attr("src", this.siteinfo.logo.blob);
-          $("#header-phone").html(this.siteinfo.phoneNumber);
+          $("#logo").attr("src", this.siteinfo.logo);
+          $("#footer-logo").attr("src", this.siteinfo.logo);
+          $("#header-phone").html(this.siteinfo.phone_number);
           $("#header-address").html(this.siteinfo.address);
-          $("#facebook").attr("href", this.siteinfo.facebooklink);
-          $("#twitter").attr("href", this.siteinfo.twitterlink);
-          $("#google").attr("href", this.siteinfo.googlelink);
+          $("#facebook").attr("href", "http://" + this.siteinfo.facebook_link);
+          $("#twitter").attr("href", "http://" + this.siteinfo.twitter_link);
+          $("#google").attr("href", "http://" + this.siteinfo.google_link);
 
           ControllerGetPages("NewYork", "40").then(response => {
             for (let i = 0; i < response.data.length; i++) {

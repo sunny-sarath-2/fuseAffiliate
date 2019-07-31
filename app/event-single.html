@@ -149,7 +149,7 @@
                             </div> -->
                       </li>
                       <li id="header-contacts">
-                        <a href="contacts.html">Contacts</a>
+                        <a href="contacts.html">Contact Us</a>
                         <ul class="rd-navbar-dropdown"></ul>
                       </li>
                     </ul>
@@ -412,14 +412,14 @@
         } else {
           admininfo = JSON.parse(response.series[0].fields.admininfo);
           this.siteinfo = JSON.parse(response.series[0].fields.siteinfo);
-          $("#logo").attr("src", this.siteinfo.logo.blob);
-          $("#footer-logo").attr("src", this.siteinfo.logo.blob);
-          $("#header-phone").html(this.siteinfo.phoneNumber);
+          $("#logo").attr("src", this.siteinfo.logo);
+          $("#footer-logo").attr("src", this.siteinfo.logo);
+          $("#header-phone").html(this.siteinfo.phone_number);
           $("#header-address").html(this.siteinfo.address);
-          $("#facebook").attr("href", this.siteinfo.facebooklink);
-          $("#twitter").attr("href", this.siteinfo.twitterlink);
-          $("#google").attr("href", this.siteinfo.googlelink);
-
+          $("#facebook").attr("href","http://"+this.siteinfo.facebook_link)
+        $("#twitter").attr("href","http://"+this.siteinfo.twitter_link)
+        $("#google").attr("href","http://"+this.siteinfo.google_link)
+          
           let params = getUrlVars()
           let id = params.id
           console.log(id.includes("\\"))

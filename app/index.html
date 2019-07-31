@@ -87,28 +87,28 @@
                             <li><a href="gift-cards.html">Gift Cards</a></li>
                           </ul>
                         </li> -->
-                        <li  id="header-events"><a href="events.html">Events</a>
+                        <li id="header-events"><a href="events.html">Events</a>
                           <!-- RD Navbar Dropdown-->
-                          <span class="rd-navbar-submenu-toggle"></span>
-                          <ul class="rd-navbar-dropdown">
-                            <!-- <li><a href="events.html">All Events</a></li>
-                            <li><a href="event-single.html">Event Page</a></li> -->
-                          </ul>
+                          <!-- <span class="rd-navbar-submenu-toggle"></span> -->
+                          <!-- <ul class="rd-navbar-dropdown">
+                            <li><a href="events.html">All Events</a></li>
+                            <li><a href="event-single.html">Event Page</a></li>
+                          </ul> -->
                         </li>
                         <!-- <li><a href="sales.html">Sales</a></li> -->
                         <li id="header-news"><a href="blog-masonry.html">News</a>
                           <!-- RD Navbar Dropdown-->
-                          <ul class="rd-navbar-dropdown">
+                          <!-- <ul class="rd-navbar-dropdown"> -->
                             <!-- <li><a href="blog-classic.html">Blog Classic</a></li>
                             <li><a href="blog-grid.html">Blog Grid</a></li>
                             <li><a href="blog-masonry.html">Blog Masonry</a></li>
                             <li><a href="blog-modern.html">Blog Modern</a></li>
                             <li><a href="blog-post.html">Blog Post</a></li> -->
-                          </ul>
+                          <!-- </ul> -->
                         </li>
                         <li id="header-gallery"><a href="gallery-masonry.html">Gallery</a>
-                          <ul class="rd-navbar-dropdown" >
-                            </ul>
+                          <!-- <ul class="rd-navbar-dropdown" >
+                            </ul> -->
                           <!-- RD Navbar Megamenu-->
                           <!-- <div class="rd-navbar-megamenu">
                             <div class="row no-gutters justify-content-sm-center">
@@ -146,8 +146,8 @@
                           </div> -->
                         </li>
                         <li id="header-contacts"><a href="contacts.html" >Contact Us</a>
-                          <ul class="rd-navbar-dropdown">
-                            </ul>
+                          <!-- <ul class="rd-navbar-dropdown">
+                            </ul> -->
                         </li>
                       </ul>
                     </div>
@@ -567,17 +567,18 @@
         }
         else{
           this.siteinfo = JSON.parse(response.series[0].fields.siteinfo)
+          console.log(siteinfo)
           // pages = JSON.parse(response.series[0].fields.pages)
-        $("#logo").attr("src",this.siteinfo.logo.blob)
-        $("#footer-logo").attr("src",this.siteinfo.logo.blob)
-        $("#header-phone").html(this.siteinfo.phoneNumber)
+        $("#logo").attr("src",this.siteinfo.logo)
+        $("#footer-logo").attr("src",this.siteinfo.logo)
+        $("#header-phone").html(this.siteinfo.phone_number)
         $("#header-address").html(this.siteinfo.address)
-        $("#footer-phone").html(this.siteinfo.phoneNumber)
+        $("#footer-phone").html(this.siteinfo.phone_number)
         $("#footer-address").html(this.siteinfo.address)
         $("#footer-email").html(this.siteinfo.email)
-        $("#facebook").attr("href",this.siteinfo.facebooklink)
-        $("#twitter").attr("href",this.siteinfo.twitterlink)
-        $("#google").attr("href",this.siteinfo.googlelink)
+        $("#facebook").attr("href","http://"+this.siteinfo.facebook_link)
+        $("#twitter").attr("href","http://"+this.siteinfo.twitter_link)
+        $("#google").attr("href","http://"+this.siteinfo.google_link)
         $("#map-changer").val(this.siteinfo.address)
         $("#map-changer").change((function(){
         let timeout = setTimeout(() => {
@@ -622,11 +623,12 @@
           }
         })
 
-        let bannerCount = parseInt(this.siteinfo.bannerCount)
+        let bannerCount = this.siteinfo.banner
         let finalbannersli = ""
         let finalbannersdiv = ""
 
-        for (let index = 0; index < bannerCount; index++) {
+        for (let index = 0; index < bannerCount.length; index++) {
+          console.log(index,"0",bannerCount.length)        
         // let banner = `<div class="swiper-slide" style="background-image: url(${this.siteinfo['banner'+index].blob}); background-size: cover;"  />`
         if(index==0){
           banner =  `<li data-target="#myCarousel" data-slide-to=${index} class="active"></li>`
@@ -636,16 +638,17 @@
         }
         finalbannersli = finalbannersli+banner
         }
-        for (let index = 1; index <= bannerCount; index++) {
+        for (let index = 1; index <= bannerCount.length; index++) {
         // let banner = `<div class="swiper-slide" style="background-image: url(${this.siteinfo['banner'+index].blob}); background-size: cover;"  />`
+        console.log(index,"1")
         let banner
         if(index == 1){
           banner = `<div class="carousel-item active">
-            <img src=${this.siteinfo['banner'+index].blob} alt="First Slide" style="height:562px">
+            <img src=${this.siteinfo.banner[index-1]} alt="First Slide" style="height:562px">
             </div>`
           }else{
             banner = `<div class="carousel-item">
-              <img src=${this.siteinfo['banner'+index].blob} alt="First Slide" style="height:562px">
+              <img src=${this.siteinfo.banner[index-1]} alt="First Slide" style="height:562px">
               </div>`
             }
             finalbannersdiv = finalbannersdiv+banner

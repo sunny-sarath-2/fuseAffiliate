@@ -83,7 +83,7 @@
                             <ul class="rd-navbar-dropdown">
                             </ul>
                           </li>
-                          <li id="header-news"><a href="blog-classic.html">News</a>
+                          <li id="header-news"><a href="blog-masonry.html">News</a>
                             <!-- RD Navbar Dropdown-->
                             <ul class="rd-navbar-dropdown">
                             </ul>
@@ -92,7 +92,7 @@
                             <ul class="rd-navbar-dropdown" >
                               </ul>
                           </li>
-                          <li id="header-contacts"><a href="contacts.html" >Contacts</a>
+                          <li id="header-contacts"><a href="contacts.html" >Contact us</a>
                             <ul class="rd-navbar-dropdown" id="header-contacts">
                               </ul>
                           </li>
@@ -297,13 +297,13 @@
         }else{
           this.siteinfo = JSON.parse(response.series[0].fields.siteinfo)
           console.log(this.siteinfo)
-          $("#logo").attr("src",this.siteinfo.logo.blob)
-          $("#footer-logo").attr("src",this.siteinfo.logo.blob)
-          $("#header-phone").html(this.siteinfo.phoneNumber)
+          $("#logo").attr("src",this.siteinfo.logo)
+          $("#footer-logo").attr("src",this.siteinfo.logo)
+          $("#header-phone").html(this.siteinfo.phone_number)
           $("#header-address").html(this.siteinfo.address)
-          $("#facebook").attr("href",this.siteinfo.facebooklink)
-        $("#twitter").attr("href",this.siteinfo.twitterlink)
-        $("#google").attr("href",this.siteinfo.googlelink)
+          $("#facebook").attr("href","http://"+this.siteinfo.facebook_link)
+          $("#twitter").attr("href","http://"+this.siteinfo.twitter_link)
+          $("#google").attr("href","http://"+this.siteinfo.google_link)
         
         ControllerGetPages("new_york", "40").then(response => {
             for (let i = 0; i < response.data.length; i++) {

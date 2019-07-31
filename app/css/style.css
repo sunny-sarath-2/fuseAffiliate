@@ -19984,3 +19984,9 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 		font-size: 18px;
 	}
 }
+/* custom css start */
+a.brand-name img {
+    height: 54px !important;
+    width: auto !important;
+}
+/* custom css end */
